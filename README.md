@@ -2,6 +2,8 @@
 
 Generate placeholder arrays instantly in VS Code. Create random integer, float, string, and boolean arrays with code snippets for multiple programming languages.
 
+**Also available as a website:** [array-ipsum.vercel.app](https://array-ipsum.vercel.app/)
+
 ## Features
 
 - **Quick Array Generation**: Generate arrays directly in your editor via Command Palette
