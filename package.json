@@ -1,0 +1,60 @@
+{
+  "name": "array-ipsum",
+  "displayName": "Array Ipsum",
+  "description": "Generate placeholder arrays instantly. Create random integer, float, string, and boolean arrays with code snippets for multiple languages.",
+  "version": "1.0.0",
+  "publisher": "ilkeeren",
+  "author": {
+    "name": "Eren",
+    "url": "https://ilkeeren.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ilkeeren/array-ipsum-vscode"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "array",
+    "generator",
+    "placeholder",
+    "lorem ipsum",
+    "mock data",
+    "test data"
+  ],
+  "icon": "images/icon.png",
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "arrayipsum.generate",
+        "title": "Array Ipsum: Generate Array"
+      },
+      {
+        "command": "arrayipsum.generateCode",
+        "title": "Array Ipsum: Generate Code Snippet"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  }
+}
