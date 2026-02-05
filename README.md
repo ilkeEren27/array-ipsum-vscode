@@ -27,9 +27,9 @@ Generate placeholder arrays instantly in VS Code. Create random integer, float, 
 | TypeScript | `const arr: number[] = [1, 2, 3];` |
 | Python | `arr = [1, 2, 3]` |
 | Java | `int[] arr = {1, 2, 3};` |
+| C | `int arr[] = {1, 2, 3};` |
 | C# | `int[] arr = {1, 2, 3};` |
 | C++ | `int arr[] = {1, 2, 3};` |
-| C | `int arr[] = {1, 2, 3};` |
 
 ## Data Types
 
