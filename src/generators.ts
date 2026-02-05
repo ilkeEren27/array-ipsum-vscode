@@ -11,7 +11,7 @@ const words: string[] = [
 ];
 
 export type DataType = "int" | "float" | "double" | "string" | "bool";
-export type Language = "javascript" | "typescript" | "python" | "java" | "csharp" | "cpp";
+export type Language = "javascript" | "typescript" | "python" | "java" | "csharp" | "cpp" | "c";
 
 /**
  * Generate an array of random integers
@@ -94,12 +94,15 @@ export function generateCodeSnippet(
     java: { int: "int", float: "float", double: "double", string: "String", bool: "boolean" },
     csharp: { int: "int", float: "float", double: "double", string: "string", bool: "bool" },
     cpp: { int: "int", float: "float", double: "double", string: "std::string", bool: "bool" },
+    c: { int: "int", float: "float", double: "double", string: "const char*", bool: "int" },
   };
 
   const formattedValues = type === "string"
     ? (arr as string[]).map(s => `"${s}"`).join(", ")
-    : arr.join(type === "float" ? "f, " : ", ") +
-    (type === "float" && !["javascript", "typescript", "python"].includes(language) ? "f" : "");
+    : type === "bool" && language === "c"
+      ? (arr as boolean[]).map(b => (b ? "1" : "0")).join(", ")
+      : arr.join(type === "float" ? "f, " : ", ") +
+      (type === "float" && !["javascript", "typescript", "python"].includes(language) ? "f" : "");
 
   switch (language) {
     case "javascript":
@@ -114,6 +117,8 @@ export function generateCodeSnippet(
       return `${typeMap.csharp[type]}[] arr = {${formattedValues}};`;
     case "cpp":
       return `${typeMap.cpp[type]} arr[] = {${formattedValues}};`;
+    case "c":
+      return `${typeMap.c[type]} arr[] = {${formattedValues}};`;
     default:
       return `[${formattedValues}]`;
   }
@@ -132,7 +137,7 @@ export function mapLanguageId(languageId: string): Language {
     "java": "java",
     "csharp": "csharp",
     "cpp": "cpp",
-    "c": "cpp",
+    "c": "c",
   };
   return languageMap[languageId] || "javascript";
 }
