@@ -8,7 +8,7 @@ import {
 } from './generators';
 
 const dataTypes: { label: string; value: DataType; description: string }[] = [
-  { label: "Integer", value: "int", description: "Whole numbers (-1000 to 1000)" },
+  { label: "Integer", value: "int", description: "Whole numbers" },
   { label: "Float", value: "float", description: "2 decimal places" },
   { label: "Double", value: "double", description: "6 decimal places" },
   { label: "String", value: "string", description: "Lorem ipsum words" },
@@ -73,7 +73,29 @@ async function promptAndGenerate(asCode: boolean): Promise<string | undefined> {
 
   const count = parseInt(countInput);
   const dataType = (typeSelection as any).value as DataType;
-  const arr = generateArray(dataType, count);
+
+  // Step 3: Ask about negative values (only for numeric types)
+  let allowNegative = true;
+  if (dataType === "int" || dataType === "float" || dataType === "double") {
+    const negativeSelection = await vscode.window.showQuickPick(
+      [
+        { label: "Yes", description: "Include negative values (-1000 to 1000)" },
+        { label: "No", description: "Only positive values (0 to 1000)" }
+      ],
+      {
+        placeHolder: "Include negative values?",
+        title: "Array Ipsum: Negative Values"
+      }
+    );
+
+    if (!negativeSelection) {
+      return undefined;
+    }
+
+    allowNegative = negativeSelection.label === "Yes";
+  }
+
+  const arr = generateArray(dataType, count, allowNegative);
 
   if (asCode) {
     // Get current file language

@@ -59,11 +59,12 @@ export function generateBools(count: number): boolean[] {
 /**
  * Generate array based on data type
  */
-export function generateArray(type: DataType, count: number): (number | string | boolean)[] {
+export function generateArray(type: DataType, count: number, allowNegative: boolean = true): (number | string | boolean)[] {
+  const min = allowNegative ? -1000 : 0;
   switch (type) {
-    case "int": return generateInts(count);
-    case "float": return generateFloats(count);
-    case "double": return generateDoubles(count);
+    case "int": return generateInts(count, min);
+    case "float": return generateFloats(count, min);
+    case "double": return generateDoubles(count, min);
     case "string": return generateStrings(count);
     case "bool": return generateBools(count);
   }
